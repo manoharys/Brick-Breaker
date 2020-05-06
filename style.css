@@ -6,17 +6,22 @@
 
 body {
     width: 100%;
-    height: 100vh;
+ 
 }
 
 .container {
     width: 100%;
-    height: 100vh;
+    margin: 0;
     background-color: rgb(0, 0, 0);
     color: white;
 }
 
-.startScreen{
+.game{
+    width: 100%;
+    height: 100vh;
+    
+}
+.startScreen {
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -28,7 +33,36 @@ body {
     color: white;
 }
 
+.ball {
+    position: absolute;
+    top: 10px;
+    left: 300px;
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    background-color: rgb(119, 158, 119);
+}
 
-.hide{
+.paddle{
+    position:absolute;
+    width:200px;
+    height: 20px;
+    background-color: indigo;
+    border-radius: 10px;
+   left: 600px;
+   bottom: 10px;
+    
+}
+.score {
+    position: absolute;
+    top:10px;
+    left:10px;
+}
+.lives {
+    position: absolute;
+    top:10px;
+    left:860px;
+}
+.hide {
     display: none;
 }

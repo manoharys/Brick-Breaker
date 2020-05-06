@@ -13,5 +13,14 @@ startScreen.addEventListener('click', start);
 function start() {
     startScreen.classList.add('hide');
     container.classList.remove('hide');
+    
+    //Creating ball element
+    let ball = document.createElement('div')
+    ball.classList.add('ball');
+    gameArea.appendChild(ball);
 
+    //Creating paddle 
+    let paddle = document.createElement('div');
+    paddle.classList.add('paddle');
+    gameArea.appendChild(paddle);
 }
