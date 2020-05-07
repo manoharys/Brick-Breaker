@@ -48,7 +48,7 @@ function start() {
     if (player.gameOver) {
         startScreen.classList.add('hide');
         container.classList.remove('hide');
-        player.ballDir = [5,  5];
+        player.ballDir = [5, 5];
 
         //Creating ball element
         ball = document.createElement('div')
@@ -157,11 +157,25 @@ function moveBall() {
     if (posBall.y > (gameArea.offsetHeight - 20) || posBall.y < 0) {
         player.ballDir[1] *= -1;
     }
-    if (posBall.x > (gameArea.offsetWidth - 20) || posBall.x < 0) {
+    if (posBall.x > (gameArea.offsetWidth - 40) || posBall.x < 0) {
         player.ballDir[0] *= -1;
     }
+
+    if (isCollide(paddle, ball)) {
+        let temp = ((posBall.x - paddle.offsetLeft) - (paddle.offsetWidth / 2)) / 10;
+        console.log('hit');
+        player.ballDir[0] = temp;
+        player.ballDir[1] *= -1;
+    };
     posBall.y += player.ballDir[1];
     posBall.x += player.ballDir[0];
     ball.style.top = posBall.y + 'px';
     ball.style.left = posBall.x + 'px';
+}
+
+//Function which returns collision detection
+function isCollide(a, b) {
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+    return !((aRect.right < bRect.left) || (aRect.left > bRect.right) || (aRect.bottom < bRect.top) || (aRect.top > bRect.bottom));
 }
