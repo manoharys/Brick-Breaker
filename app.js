@@ -111,14 +111,21 @@ function setupBricks(num) {
         x: ((gameArea.offsetWidth % 100) / 2),
         y: 50
     }
+
+    let skip = false;
     for (let x = 0; x < num; x++) {
         console.log(row);
-        if (row.x > (gameArea.offsetWidth -100)) {
+        if (row.x > (gameArea.offsetWidth - 100)) {
             row.y += 50;
+            if (row.y > (gameArea.offsetHeight / 2)) {
+                skip = true
+            }
             row.x = ((gameArea.offsetWidth % 100) / 2);
         }
         row.count = x;
-        createBrick(row);
+        if (!skip) {
+            createBrick(row);
+        }
         row.x += 100;
     }
 }
