@@ -60,6 +60,7 @@ body {
     height: 25px;
     border-radius: 20px;
     background-color: rgb(119, 158, 119);
+    background-image: url(./ball.png);
 }
 
 .paddle {
