@@ -5,10 +5,10 @@ const gameArea = document.querySelector('.gameArea');
 const startScreen = document.querySelector('.startScreen');
 const gameMessage = document.querySelector('.gameMessage');
 
-console.log(startScreen.getBoundingClientRect())
+
 let conDim = gameArea.getBoundingClientRect();
 
-console.log(conDim)
+
 //Global var
 let paddle;
 let ball;
@@ -34,18 +34,19 @@ document.addEventListener('keyup', pressOff);
 //function which return the keypress events
 function pressOn(e) {
     keys[e.code] = true;
-    console.log(keys);
+    
 }
 
 function pressOff(e) {
     keys[e.code] = false;
-    console.log(keys);
+
 
 }
 
 //function which starts the gamePlay
 function start() {
     if (player.gameOver) {
+        gameMessage.classList.add('hide');
         startScreen.classList.add('hide');
         container.classList.remove('hide');
         player.ballDir = [5, 5];
@@ -78,7 +79,7 @@ function start() {
 }
 //function which animates to run the game
 function update() {
-
+if(!player.gameover){
     if (keys.ArrowLeft && paddle.x > 0) {
         paddle.x -= player.speed;
     }
@@ -97,7 +98,7 @@ function update() {
 
     window.requestAnimationFrame(update);
 }
-
+}
 //Function which updates the score..
 function scoreUpdator() {
     score.innerHTML = "Score :" + player.score;
@@ -116,7 +117,7 @@ function setupBricks(num) {
 
     let skip = false;
     for (let x = 0; x < num; x++) {
-        console.log(row);
+        
         if (row.x > (gameArea.offsetWidth - 100)) {
             row.y += 50;
             if (row.y > (gameArea.offsetHeight / 2)) {
@@ -153,8 +154,13 @@ function moveBall() {
         x: ball.offsetLeft,
         y: ball.offsetTop
     }
-    if (posBall.y > (gameArea.offsetHeight - 20) || posBall.y < 0) {
-        player.ballDir[1] *= -1;
+    if (posBall.y > (gameArea.offsetHeight - 40) || posBall.y < 0) {
+
+        if (posBall.y > (gameArea.offsetHeight - 40)) {
+            fallOff();
+        } else {
+            player.ballDir[1] *= -1;
+        }
     }
     if (posBall.x > (gameArea.offsetWidth - 40) || posBall.x < 0) {
         player.ballDir[0] *= -1;
@@ -162,7 +168,7 @@ function moveBall() {
 
     if (isCollide(paddle, ball)) {
         let temp = ((posBall.x - paddle.offsetLeft) - (paddle.offsetWidth / 2)) / 10;
-        console.log('hit');
+        //console.log('hit');
         player.ballDir[0] = temp;
         player.ballDir[1] *= -1;
     };
@@ -187,3 +193,25 @@ function isCollide(a, b) {
     let bRect = b.getBoundingClientRect();
     return !((aRect.right < bRect.left) || (aRect.left > bRect.right) || (aRect.bottom < bRect.top) || (aRect.top > bRect.bottom));
 }
+
+function fallOff() {
+    player.lives--;
+    lives.innerHTML = "lives :" + player.lives;
+    if (player.lives < 0) {
+        endGame();
+        player.lives = 0;
+    }
+}
+
+function endGame() {
+    gameMessage.style.display = "block";
+    gameMessage.innerHTML = "Game Over<br>Your score " + player.score;
+    player.gameover = true;
+    ball.style.display = "none";
+    let tempBricks = document.querySelectorAll('.brick');
+    for (let tBrick of tempBricks) {
+        tBrick.parentNode.removeChild(tBrick);
+    }
+}
+
+function stopper() {}
