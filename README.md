@@ -10,5 +10,5 @@
  
  ##### <a href = "https://manoharys.github.io/Brick-Breaker/">Play here</a>
 
-
+<img src = "https://github.com/manoharys/Brick-Breaker/blob/master/preview.gif">
 
