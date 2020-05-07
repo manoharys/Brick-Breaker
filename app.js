@@ -48,7 +48,7 @@ function start() {
     if (player.gameOver) {
         startScreen.classList.add('hide');
         container.classList.remove('hide');
-
+        player.ballDir = [5,  5];
 
         //Creating ball element
         ball = document.createElement('div')
@@ -85,6 +85,9 @@ function update() {
     if (keys.ArrowRight && paddle.x < (container.offsetWidth - (paddle.offsetWidth + 20))) {
         paddle.x += player.speed;
     }
+
+    //moving ball
+    moveBall();
 
     //updating its styles
     paddle.style.left = paddle.x + 'px';
@@ -143,4 +146,22 @@ function createBrick(pos) {
 //Function which returns random hex colors
 function rColor() {
     return '#' + Math.random().toString(16).substr(-6);
+}
+
+//Moving ball with different direction
+function moveBall() {
+    let posBall = {
+        x: ball.offsetLeft,
+        y: ball.offsetTop
+    }
+    if (posBall.y > (gameArea.offsetHeight - 20) || posBall.y < 0) {
+        player.ballDir[1] *= -1;
+    }
+    if (posBall.x > (gameArea.offsetWidth - 20) || posBall.x < 0) {
+        player.ballDir[0] *= -1;
+    }
+    posBall.y += player.ballDir[1];
+    posBall.x += player.ballDir[0];
+    ball.style.top = posBall.y + 'px';
+    ball.style.left = posBall.x + 'px';
 }
