@@ -93,8 +93,7 @@ function update() {
     paddle.style.left = paddle.x + 'px';
 
     //updating score
-    player.score++;
-    scoreUpdator();
+
 
     window.requestAnimationFrame(update);
 }
@@ -167,6 +166,15 @@ function moveBall() {
         player.ballDir[0] = temp;
         player.ballDir[1] *= -1;
     };
+    let bricks = document.querySelectorAll('.brick');
+    for (let tBrick of bricks) {
+        if (isCollide(tBrick, ball)) {
+            player.ballDir[1] *= -1;
+            tBrick.parentNode.removeChild(tBrick);
+            player.score += 100;
+            scoreUpdator();
+        }
+    }
     posBall.y += player.ballDir[1];
     posBall.x += player.ballDir[0];
     ball.style.top = posBall.y + 'px';

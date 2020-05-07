@@ -52,7 +52,7 @@ body {
 
 .ball {
     position: absolute;
-    top: 10px;
+    bottom:  100px;
     left: 200px;
     width: 25px;
     height: 25px;
@@ -67,7 +67,7 @@ body {
     background-color: indigo;
     border-radius: 10px;
     left: 100px;
-    bottom: 100px;
+    bottom: 50px;
   
 }
 
