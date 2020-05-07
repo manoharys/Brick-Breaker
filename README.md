@@ -6,6 +6,9 @@
  
  ##### Use Arrow keys for movements
   
+# Live demo
+ 
+ ##### <a href = "https://manoharys.github.io/Brick-Breaker/">Play here</a>
 
 
 
